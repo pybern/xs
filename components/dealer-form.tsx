@@ -28,6 +28,11 @@ const formSchema = z.object({
   purchaseOrder: z.string(),
 })
 
+interface DealerFormProps {
+    onFormComplete: (isComplete: boolean) => void;
+  }
+  
+
 export function DealerForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
