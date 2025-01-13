@@ -70,36 +70,7 @@ function VehicleInfoContent() {
   }
 
   return (
-    <div className="container mx-auto py-6 sm:py-10 px-4 sm:px-6">
-      <div className="mb-6 sm:mb-8">
-        <h1 className="text-xl sm:text-2xl font-semibold">New Booking</h1>
-        <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
-          <span>Home</span>
-          <span>/</span>
-          <span>New Shipping Booking</span>
-        </div>
-      </div>
-      <div className="mb-8 sm:mb-10">
-        <ProgressSteps currentStep={1} steps={steps} completedSteps={completedSteps} />
-      </div>
-      <div className="mx-auto max-w-3xl rounded-lg border bg-card p-4 sm:p-6 shadow-sm">
-        <div className="mb-4 sm:mb-6">
-          <h2 className="text-base sm:text-lg font-medium">Vehicle Information</h2>
-          <p className="text-xs sm:text-sm text-muted-foreground">
-            Enter vehicle details
-          </p>
-        </div>
-        <VehicleForm />
-        <div className="mt-6 sm:mt-8">
-          <h3 className="text-base sm:text-lg font-medium mb-3 sm:mb-4">Added Vehicles</h3>
-          <VehicleList />
-        </div>
-        <div className="mt-6 flex justify-between">
-          <Button variant="outline" onClick={() => router.push("/new-booking")}>Previous</Button>
-          <Button onClick={handleNext}>Next</Button>
-        </div>
-      </div>
-    </div>
+    <VehicleForm />
   )
 }
 

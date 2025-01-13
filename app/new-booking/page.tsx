@@ -51,27 +51,6 @@ export default function NewBookingPage() {
 
 
     return (
-            <div className="container mx-auto py-10">
-                <div className="mb-8">
-                    <h1 className="text-2xl font-semibold">New Booking</h1>
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <span>Home</span>
-                        <span>/</span>
-                        <span>New Shipping Booking</span>
-                    </div>
-                </div>
-                <div className="mb-10">
-                    <ProgressSteps currentStep={0} steps={steps} completedSteps={[]} />
-                </div>
-                <div className="mx-auto max-w-3xl rounded-lg border bg-card p-6 shadow-sm">
-                    <div className="mb-6">
-                        <h2 className="text-lg font-medium">Dealer/Customer</h2>
-                        <p className="text-sm text-muted-foreground">
-                            Enter Dealer/Customer Details
-                        </p>
-                    </div>
-                    <DealerForm />
-                </div>
-            </div>
+        <DealerForm />
     )
 }
