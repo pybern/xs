@@ -61,7 +61,7 @@ export default function NewBookingPage() {
                     </div>
                 </div>
                 <div className="mb-10">
-                    {/* <ProgressSteps currentStep={0} steps={steps} completedSteps={completedSteps} /> */}
+                    <ProgressSteps currentStep={0} steps={steps} completedSteps={[]} />
                 </div>
                 <div className="mx-auto max-w-3xl rounded-lg border bg-card p-6 shadow-sm">
                     <div className="mb-6">
