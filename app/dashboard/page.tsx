@@ -1,4 +1,5 @@
 import { AppSidebar } from "@/components/app-sidebar"
+import { DataTable } from "@/components/budget-table"
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -13,8 +14,24 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
+import { supabase } from '@/lib/supabase/client'
 
-export default function Page() {
+async function getData() {
+  const { data, error } = await supabase
+    .from('budget') 
+    .select('*')
+  
+  if (error) {
+    console.error('Error fetching data:', error)
+    return []
+  }
+  
+  return data
+}
+
+export default async function DashboardPage() {
+  const budget = await getData()
+
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -44,7 +61,12 @@ export default function Page() {
             <div className="aspect-video rounded-xl bg-muted/50" />
             <div className="aspect-video rounded-xl bg-muted/50" />
           </div>
-          <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min" />
+          <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min">
+            <div className="p-6">
+              <h1 className="text-2xl font-bold mb-4">Budget Overview</h1>
+              <DataTable data={budget} tableName="budget" />
+            </div>
+          </div>
         </div>
       </SidebarInset>
     </SidebarProvider>
