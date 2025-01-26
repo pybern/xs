@@ -15,11 +15,14 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar"
 import { supabase } from '@/lib/supabase/client'
+import { BudgetTotal } from '@/components/budget-total'
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
+import { cookies } from 'next/headers'
 
 async function getData() {
   const { data, error } = await supabase
     .from('budget') 
-    .select('*')
+    .select('id, category, sub_category, amount, check')
   
   if (error) {
     console.error('Error fetching data:', error)
@@ -31,6 +34,8 @@ async function getData() {
 
 export default async function DashboardPage() {
   const budget = await getData()
+
+  const initialTotal = budget?.reduce((sum, row) => sum + (row.amount || 0), 0) || 0
 
   return (
     <SidebarProvider>
@@ -57,13 +62,14 @@ export default async function DashboardPage() {
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
           <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-            <div className="aspect-video rounded-xl bg-muted/50" />
+          <BudgetTotal initialTotal={initialTotal} tableName="budget" />
             <div className="aspect-video rounded-xl bg-muted/50" />
             <div className="aspect-video rounded-xl bg-muted/50" />
           </div>
           <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min">
             <div className="p-6">
               <h1 className="text-2xl font-bold mb-4">Budget Overview</h1>
+
               <DataTable data={budget} tableName="budget" />
             </div>
           </div>
